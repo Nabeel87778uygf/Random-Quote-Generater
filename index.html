@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generater</title>
+    <style>
+
+        h1{
+        text-align: center;
+        border: 6px solid black;
+        border-radius: 15px; 
+        padding: 20px; 
+        margin: 30px auto; 
+        width: fit-content; 
+        background-color: #f0f0f0; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        font-family: Arial, sans-serif; 
+        transition: 1.5s ease-in-out;
+        }
+        h1:hover{
+            transform: scale(1.3);
+        }
+        #joke {
+            margin: 70px;
+            padding: 12px 24px; 
+            background-color: #4CAF50; 
+            color: white; 
+            font-size: 18px; 
+            border: none; 
+            border-radius: 8px;
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+
+        #joke:hover {
+            background-color: #45a049; 
+            transform: scale(1.05);
+        }
+
+        #joke:active {
+            background-color: #388e3c; 
+        }
+
+        #output {
+            font-size: 18px;
+            color: #333; 
+            background-color: #fff; 
+            padding: 15px;
+            border: 2px solid #ddd; 
+            border-radius: 8px; 
+            width: 60%; 
+            margin: 10px auto; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+        }
+    </style>
+</head>
+<body>
+    <h1 id="color">Random Joke Generater</h1>
+    <button id="joke">click me</button>
+    <p id="output"></p>
+
+    <script>
+        let joke = document.getElementById("joke");
+        let output = document.getElementById("output");
+
+        joke.addEventListener("click",async()=>{
+            const URL =  "https://v2.jokeapi.dev/joke/Any";
+
+    try{
+            let response = await fetch(URL);
+            let data =   await response.json();
+            console.log(data);
+            if(data.type === "single"){
+                output.textContent= `${data.joke}`
+            } else{
+                output.textContent = `${data.setup} - ${data.delivery}`
+            }
+        }
+    catch(error){
+            output.textContent =  "Oops! Something went wrong. Try again later.";
+            console.log(error);
+
+        }
+
+});
+joke.addEventListener("mouseover", () => {
+            joke.style.backgroundColor = "red";
+            joke.style.color = "white";
+        });
+       
+        joke.addEventListener("mouseout", () => {
+            joke.style.backgroundColor = "";
+            joke.style.color = "";
+        });
+        color.addEventListener("mouseover",()=>{
+            color.style.backgroundColor = "Yellow"
+            color.style.cursor = "pointer";
+        });
+        color.addEventListener("mouseout",()=>{
+            color.style.backgroundColor = "";
+            
+        })
+
+
+
+        
+       
+    </script>
+</body>
+</html>
